@@ -13,7 +13,7 @@ class Task(models.Model):
     end_time = models.DateTimeField()
     duration = models.DateTimeField()
     priority = models.CharField(choices=choices, default="low")
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, null=False, blank=False)
 
     def save(self, *args, **kwargs):
         start = self.start_date

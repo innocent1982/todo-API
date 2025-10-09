@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from user.models import User
 from task.models import Task
+from .utility_serializers import DefaultUser
 
 class UserSerializer(serializers.ModelSerializer):
    
@@ -8,7 +9,7 @@ class UserSerializer(serializers.ModelSerializer):
         model=User
         fields = "__all__"
 
-class TaskManager(serializers.ModelSerializer):
+class TaskSerializer(serializers.ModelSerializer):
     owner = DefaultUser(read_only=True)
     class Meta:
         model=Task
@@ -20,6 +21,4 @@ class TaskManager(serializers.ModelSerializer):
         }
 
 
-class DefaultUser(serializers.Serializer):
-    id = serializers.IntegerField(read_only=True)
-    username= serializers.CharField(read_only=True)
+

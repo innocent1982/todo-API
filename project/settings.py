@@ -45,6 +45,23 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt'
 ]
 
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        'rest_framework_simplejwt.authentication.JWTAuthentication'
+    ],
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated"
+    ]
+}
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'REFRESH_TOKEN_LIFETIME': timedelta(hours=2),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=2),
+    "ROTATE_REFRESH_TOKENS": False,
+    "BLACKLIST_AFTER_ROTATION": True
+}
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

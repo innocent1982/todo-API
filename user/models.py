@@ -8,5 +8,8 @@ class User(AbstractUser):
     phone = models.CharField(validators=[RegexValidator(regex=regex), MinLengthValidator(10)], unique=True, max_length=13, null=False, blank=False) 
     age = models.IntegerField(null=False, blank=False)
 
-    objects = UserManager()
+    def save(self, *args, **kwargs):
+        password = self.password
+        self.set_password(password)
+        super().save(*args, **kwargs)
 
