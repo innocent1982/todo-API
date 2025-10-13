@@ -9,6 +9,10 @@ class UserSerializer(serializers.ModelSerializer):
         model=User
         fields = "__all__"
 
+    def update(self, instance, validated_data):
+        print(validated_data)
+        return super().update(instance, validated_data)
+
 class TaskSerializer(serializers.ModelSerializer):
     owner = DefaultUser(read_only=True)
     class Meta:

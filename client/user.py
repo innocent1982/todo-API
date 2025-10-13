@@ -101,6 +101,4 @@ def modify_user():
     print("Failed to modify user")
     print(response.json())
 
-
-details = get_details()
-print(details)
+create_user()

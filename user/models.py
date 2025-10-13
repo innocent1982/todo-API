@@ -9,7 +9,11 @@ class User(AbstractUser):
     age = models.IntegerField(null=False, blank=False)
 
     def save(self, *args, **kwargs):
-        password = self.password
-        self.set_password(password)
-        super().save(*args, **kwargs)
+        if self.password:
+            password = self.password
+            self.set_password(password)
+            super().save(*args, **kwargs)
+        else:
+            super().save(*args, **kwargs)
+
 
