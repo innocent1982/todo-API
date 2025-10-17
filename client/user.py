@@ -44,6 +44,8 @@ if credentials == None:
                 new_data = get_tokens()
                 credentials = new_data
 
+def get_credentials():
+    return credentials
 
 def create_user():
     username = input("username: ")
@@ -101,4 +103,4 @@ def modify_user():
     print("Failed to modify user")
     print(response.json())
 
-create_user()
+
