@@ -14,7 +14,7 @@ class TaskView(APIView):
             print(serializer.validated_data)
             owner = request.user
             serializer.save(owner=owner)
-            return Response({"Success": serializer.data}, status=200)
+            return Response({"Success": serializer.data}, status=201)
         return Response({"Failure": serializer.errors}, status=400)
 
     def get(self, request, *args, **kwargs):
@@ -25,7 +25,7 @@ class TaskView(APIView):
                 if serializer.is_valid():
                     data = serializer.data
                     return Response({"data": data}, status=200)
-                return Response({"error": serializer.errors}, status=402)
+                return Response({"error": serializer.errors}, status=400)
             else:
                 return Response({"error": "Item not Found"}, status=404)
         else:
@@ -50,7 +50,7 @@ class TaskView(APIView):
                 serializer.save()
                 data = serializer.data
                 return Response({"Success": data}, status=200)
-            return Response({"error": serializer.errors}, status=402)
+            return Response({"error": serializer.errors}, status=400)
         else:
             return Response({"error": "Item not Found"}, status=404)
 
@@ -99,12 +99,12 @@ class UserView(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response({"Success": serializer.data}, status=200)
-        return Response({"Failed to Patch": serializer.errors}, status=500)
+        return Response({"Failed to Patch": serializer.errors}, status=400)
 
     def post(self, request, *args, **kwargs):
         serializer = UserSerializer(data=request.data)
         print(request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({"Success": serializer.data}, status=200)
-        return Response({"Failure": serializer.errors}, status=400)
+            return Response({"Success": serializer.data}, status=201)
+        return Response({"Failure": serializer.errors}, status=400t)
